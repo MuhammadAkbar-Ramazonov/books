@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Books</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body>
+  
+  
+  <header>
+    <div class="container">
+      
+      <div class="d-flex align-items-center justify-content-between py-3">    
+        <a class="text-decoration-none d-flex align-items-center " href="#">
+          <img class="me-4" src="./images/icons/book-icon.svg" alt="book icon">
+          <span class="text-dark me-1 fw-bold">Online </span>
+          <span class="text-info fw-bold">books</span>
+        </a>
+        <nav class="sitenav text-center">
+          <ul class="list-unstyled d-flex align-items-center justify-content-center mb-0">
+            <li class="me-4">
+              <a class="text-decoration-none text-info fw-bold" href="#">Home</a>
+            </li>
+            <li class="me-4">
+              <a class="text-decoration-none text-info fw-bold" href="#">Books</a>
+            </li>
+            <li class="">
+              <a class="text-decoration-none text-info fw-bold" href="#">Favourite</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+  
+  <section class="search bg-info mb-5">
+    <div class="container">
+      <h1 class="visually-hidden">Site book</h1>
+      <h2 class="visually-hidden">choose you need book</h2>
+      <form class="row justify-content-between site-form p-5">
+        <input class="col-9 mb-3 rounded-pill form-search-input border-0" type="text" placeholder="Serch" aria-label="Write search book">
+        <button class="col-2 mb-3 btn btn-primary rounded-pill border-0" type="submit">Search</button>
+        
+        <select class="col-2 py-1 site-select-sort rounded-pill border-0" name="book_sort">
+          <option value="a-z">A-Z</option>
+          <option value="a-z">A-Z</option>
+          <option value="new-to-old">year</option>
+          <option value="old-to-new">year</option>
+          <option value="page-from-start">page</option>
+          <option value="page-from-end">page</option>
+        </select>
+        
+        <input class="col-3 py-1  form-search-year rounded-pill border-0" type="number" placeholder="Year" aria-label="write search book year">
+        
+        <select class="col-3 py-1 site-select-author rounded-pill border-0" name="book_author">
+          <option hidden >Author</option>
+        </select>
+        
+        <select class="col-3 py-1 site-select-language rounded-pill border-0" name="book_language">
+          <option hidden >All</option>
+        </select>
+      </form>
+    </div>
+  </section>
+  
+  
+  <section>
+    <div class="container">
+      <h2 class="visually-hidden">books</h2>
+      <ul class="row books-list justify-content-center">
+        
+      </ul>
+    </div>
+  </section>
+  
+  
+  
+  <template class="book-temp">
+    <li class="mb-3 col-12 col-sm-6 col-md-4 col-lg-3 text d-flex align-items-stretch ">
+      <div class="d-flex flex-column justify-content-between w-100 p-3 card rounded-3 "> 
+        <img class="book-img" src="./images/a-Dolls-house.jpg" alt="">
+        <h3 class="book-title text-dark ">I thing apart</h3>
+        <p class="book-desc text-secondary">Noo i dont thing</p>
+        <div class="book-inner d-flex mb-2 justify-content-between align-items-center">
+          <div class="book-year d-flex text-secondary">1358</div>
+          <div class="book-page d-flex text-secondary">154</div>
+          <div class="book-language d-flex text-secondary">english</div>
+        </div>
+        <div class="d-flex align-items-center justify-content-between">
+          <a class="book-link text-primary" href="#" target="blank">Wikipedia</a>
+          <button class="btn btn-info site-bookmark text-white" type="button">Bokmark</button>
+        </div>
+      </div>
+    </li>
+  </template>
+  
+  
+  <!-- scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script src="./js/books.js"></script>
+  <script src="./js/main.js"></script>
+  
+</body>
+
+</html>
