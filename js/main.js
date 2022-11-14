@@ -18,15 +18,35 @@ function showSearchMovies(search) {
   return filteredMovies;
 };
 
+
+for (const  book of books) {
+
+  const elTemp = document.querySelector(".book-temp").content;
+  const elCloneTemp = elTemp.cloneNode(true);
+
+  elCloneTemp.querySelector(".book-img").src = book.imageLink;
+  elCloneTemp.querySelector(".book-title").textContent = book.title;
+  elCloneTemp.querySelector(".book-desc").textContent = book.author;
+  elCloneTemp.querySelector(".book-year").textContent = book.year;
+  elCloneTemp.querySelector(".book-page").textContent = book.pages;
+  elCloneTemp.querySelector(".book-language").textContent = book.language;
+  elCloneTemp.querySelector(".book-link").href = book.link;
+
+  newFragment.appendChild(elCloneTemp);
+};
+
+elList.appendChild(newFragment);
+
 elForm.addEventListener("submit", evt =>{
   evt.preventDefault();
-
+  
   elList.innerHTML = "";
   
   const elFormInputValue = elSearchInput.value.trim();
   const regexValue = new RegExp(elFormInputValue, "gi");
   
   const searchMovie = showSearchMovies(regexValue)
+  
   
   if (searchMovie.length > 0){
     
@@ -58,22 +78,4 @@ elForm.addEventListener("submit", evt =>{
     elList.innerHTML = "Movie not found !!!";
   }
 })
-
-// for (const  book of books) {
-  
-//   const elTemp = document.querySelector(".book-temp").content;
-//   const elCloneTemp = elTemp.cloneNode(true);
-  
-//   elCloneTemp.querySelector(".book-img").src = book.imageLink;
-//   elCloneTemp.querySelector(".book-title").textContent = book.title;
-//   elCloneTemp.querySelector(".book-desc").textContent = book.author;
-//   elCloneTemp.querySelector(".book-year").textContent = book.year;
-//   elCloneTemp.querySelector(".book-page").textContent = book.pages;
-//   elCloneTemp.querySelector(".book-language").textContent = book.language;
-//   elCloneTemp.querySelector(".book-link").href = book.link;
-  
-//   newFragment.appendChild(elCloneTemp);
-// };
-
-// elList.appendChild(newFragment);
 
