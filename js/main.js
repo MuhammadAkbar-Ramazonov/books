@@ -6,12 +6,15 @@ const elSelectAuthor = elForm.querySelector(".site-select-author");
 const elSelectLanguage = elForm.querySelector(".site-select-language");
 const elList = document.querySelector(".books-list");
 
+const elLanguage = [];
+
 // feragment
 const newFragment = document.createDocumentFragment();
 
-function showSearchMovies(search) {
+function showSearchMovies(search, year, author, language) {
   const filteredMovies = books.filter(item => {
-    const moreCriterias =  String(item.title).match(search);
+    console.log(Number(year))
+    const moreCriterias =  String(item.title).match(search) && (Number(year) <= item.year || Number(year) == 0) && String(item.author).match(author) && (item.language == language || language == "");
     return moreCriterias;
   });  
   return filteredMovies;
@@ -20,20 +23,20 @@ function showSearchMovies(search) {
 function sortArr(arr, select){
   if(select == "a-z"){
     arr.sort((a, b) => {
-      if (String(a.title) > String(b.title)) {
+      if (String(a.title) < String(b.title)) {
         return -1
       }
-      if (String(a.title) < String(b.title)) {
+      if (String(a.title) > String(b.title)) {
         return 1
       }
       return 0
     })
   } else if(select == "z-a"){
     arr.sort((a, b) => {
-      if (String(a.title) < String(b.title)) {
+      if (String(a.title) > String(b.title)) {
         return -1
       }
-      if (String(a.title) > String(b.title)) {
+      if (String(a.title) < String(b.title)) {
         return 1
       }
       return 0
@@ -55,14 +58,30 @@ function sortArr(arr, select){
 }
 
 function renderArr(arr, regex = ""){
+  const elTemp = document.querySelector(".book-temp").content;
   for (const  book of arr) {
     
-    const elTemp = document.querySelector(".book-temp").content;
     const elCloneTemp = elTemp.cloneNode(true);
+
+    book.language.split(" ").forEach(element => {
+      if (!elLanguage.includes(element)) {
+        elLanguage.push(element);
+        const elOption = document.createElement("option");
+        
+        elOption.textContent = element
+        
+        elSelectLanguage.appendChild(elOption);
+        
+      }
+    });
     
     elCloneTemp.querySelector(".book-img").src = book.imageLink;
     
+    
+    
+    
     if(regex.source != "(?:)" && regex){
+      // console.log(regex.source)
       elCloneTemp.querySelector(".book-title").innerHTML = book.title.replace(regex, `<mark class="bg-warning">${regex.source.toLowerCase()}</mark>`);
     } else {
       elCloneTemp.querySelector(".book-title").textContent = book.title;
@@ -77,7 +96,6 @@ function renderArr(arr, regex = ""){
   };
   
   elList.appendChild(newFragment);
-  
 }
 
 elForm.addEventListener("submit", evt =>{
@@ -86,32 +104,24 @@ elForm.addEventListener("submit", evt =>{
   elList.innerHTML = "";
   
   const elFormInputValue = elSearchInput.value.trim();
+  const elSearchYearValue = elSearchYear.value.trim();
   const elSearchSortValue = elSearchSort.value.trim();
+  const elSearchAuthorValue = elSelectAuthor.value.trim();
+  const elSelectLanguageValue = elSelectLanguage.value.trim();
+  
+  const regexSearchText = new RegExp(elFormInputValue, "gi");
+  const regexSearchAuthor = new RegExp(elSearchAuthorValue, "gi");
   
   
-  const regex = new RegExp(elFormInputValue, "gi");
-  
-  const searchMovie = showSearchMovies(regex)
-  
+  const searchMovie = showSearchMovies(regexSearchText, elSearchYearValue, regexSearchAuthor, elSelectLanguageValue)
+  console.log(searchMovie);
   if (searchMovie.length > 0){
     sortArr(searchMovie, elSearchSortValue)
-    renderArr(searchMovie, regex);
+    renderArr(searchMovie, regexSearchText);
   }else{
     elList.innerHTML = "Movie not found !!!";
   }
-});
-
-
-const err = ["dfssd", "sdfsdf", "sadasd","asdad"]
-
-err.sort((a, b) => {
-  if (a > b) {
-    return 1;
-  }
-  if (a < b) {
-    return -1;
-  }
-  return 0;
+  
 });
 
 renderArr(books);
