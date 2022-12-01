@@ -10,6 +10,7 @@ const elLanguage = [];
 
 // feragment
 const newFragment = document.createDocumentFragment();
+AOS.init();
 
 function showSearchMovies(search, year, author, language) {
   const filteredMovies = books.filter(item => {
